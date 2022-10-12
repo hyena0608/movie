@@ -1,22 +1,22 @@
 package movie.ticket.view.output.controller;
 
-import movie.ticket.dto.cinema.CinemaDto;
+import movie.ticket.dto.cinema.ScreenDto;
 
 import java.util.List;
 
 import static movie.ticket.view.output.OutputView.print;
 import static movie.ticket.view.output.UnitMessage.*;
 
-public class CinemaControllerOutputView {
+public class ScreenControllerOutputView {
 
     private static final String ANNOUNCE_SELECT_CINEMA = "영화관 선택";
 
-    public void responseCinemaListUp(List<CinemaDto> cinemaDtos) {
+    public void responseScreenListUp(List<ScreenDto> cinemaDtos) {
         String cinemaListUpResponse = cinemaListUpResponse(cinemaDtos);
         print(cinemaListUpResponse);
     }
 
-    private String cinemaListUpResponse(List<CinemaDto> cinemaDtos) {
+    private String cinemaListUpResponse(List<ScreenDto> cinemaDtos) {
         StringBuilder textBuilder = new StringBuilder();
 
         textBuilder.append(ANNOUNCE_SELECT_CINEMA)

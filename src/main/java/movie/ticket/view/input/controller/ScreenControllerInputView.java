@@ -3,11 +3,11 @@ package movie.ticket.view.input.controller;
 import movie.ticket.form.NumberForm;
 
 import static movie.ticket.view.input.InputView.read;
-import static movie.ticket.view.input.exception.CinemaMenuException.CINEMA_MENU_FORM_EXCEPTION;
+import static movie.ticket.view.input.exception.ScreenMenuException.CINEMA_MENU_FORM_EXCEPTION;
 import static movie.ticket.view.input.util.RegexUtil.REGEX_NUMBER_FORM;
 import static movie.ticket.view.input.util.RegexUtil.checkRegex;
 
-public class CinemaControllerInputView {
+public class ScreenControllerInputView {
     
     public static NumberForm askCinema() {
         String cinemaNumber = read();

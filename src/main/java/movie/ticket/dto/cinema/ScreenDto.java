@@ -1,11 +1,11 @@
 package movie.ticket.dto.cinema;
 
-public class CinemaDto {
+public class ScreenDto {
 
     private final Long id;
     private final String name;
 
-    public CinemaDto(Long id, String name) {
+    public ScreenDto(Long id, String name) {
         this.id = id;
         this.name = name;
     }
