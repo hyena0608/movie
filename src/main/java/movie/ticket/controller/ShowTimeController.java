@@ -1,5 +1,6 @@
 package movie.ticket.controller;
 
+import movie.ticket.QueryContainer;
 import movie.ticket.domain.showtime.ShowTimeDtoGenerator;
 import movie.ticket.domain.showtime.ShowTimes;
 import movie.ticket.dto.showtime.ShowTimeDto;
@@ -13,6 +14,12 @@ public class ShowTimeController {
 
     private final ShowTimeControllerInputView inputView = new ShowTimeControllerInputView();
     private final ShowTimeControllerOutputView outputView = new ShowTimeControllerOutputView();
+
+    public void askShowTime() {
+        QueryContainer.saveShowTimeQuery(
+                inputView.askShowTime()
+        );
+    }
 
     public void showTimeListUp() {
         List<ShowTimeDto> findAllShowTimeDtos = ShowTimes.findAllShowTimes()

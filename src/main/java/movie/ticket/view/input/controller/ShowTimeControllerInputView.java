@@ -9,7 +9,7 @@ import static movie.ticket.view.input.util.RegexUtil.checkRegex;
 
 public class ShowTimeControllerInputView {
 
-    public static NumberForm askShowTime() {
+    public NumberForm askShowTime() {
         String showTimeNumber = read();
         if (!checkShowTimeNumber(showTimeNumber)) {
             throw new NullPointerException(SHOWTIME_MENU_FORM_EXCEPTION.message);
@@ -17,7 +17,7 @@ public class ShowTimeControllerInputView {
         return new NumberForm(showTimeNumber);
     }
 
-    private static boolean checkShowTimeNumber(String showTimeNumber) {
+    private boolean checkShowTimeNumber(String showTimeNumber) {
         return showTimeNumber.length() != 0 && checkRegex(REGEX_NUMBER_FORM, showTimeNumber);
     }
 }

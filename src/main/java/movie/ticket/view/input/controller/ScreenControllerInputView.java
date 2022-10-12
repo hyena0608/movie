@@ -9,7 +9,7 @@ import static movie.ticket.view.input.util.RegexUtil.checkRegex;
 
 public class ScreenControllerInputView {
     
-    public static NumberForm askScreen() {
+    public NumberForm askScreen() {
         String screenNumber = read();
         if (!checkScreenNumber(screenNumber)) {
             throw new NullPointerException(SCREEN_MENU_FORM_EXCEPTION.message);
@@ -17,7 +17,7 @@ public class ScreenControllerInputView {
         return new NumberForm(screenNumber);
     }
 
-    private static boolean checkScreenNumber(String screenNumber) {
+    private boolean checkScreenNumber(String screenNumber) {
         return screenNumber.length() != 0 && checkRegex(REGEX_NUMBER_FORM, screenNumber);
     }
 }

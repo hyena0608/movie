@@ -1,10 +1,14 @@
 package movie.ticket.domain.cinema;
 
 import movie.ticket.domain.movie.Movie;
+import movie.ticket.exception.CinemaException;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static movie.ticket.exception.CinemaException.*;
 
 public enum Cinemas {
 
@@ -27,11 +31,22 @@ public enum Cinemas {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    public static Cinemas findCinemaById(Long id) {
+        return Arrays.stream(Cinemas.values())
+                .filter(cinema -> Objects.equals(cinema.cinemaId, id))
+                .findFirst()
+                .orElseThrow(() -> new NullPointerException(CINEMA_NOT_FOUND_EXCEPTION.message));
+    }
+
     public Collection<Cinemas> findAllCinemasWhereMoviePlays(Movie movie) {
         return Cinemas.findAllCinemas()
                 .stream()
                 .filter(cinema -> cinema.checkMoviePlays(movie))
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    public CinemaMovie findCinemaMovieTypeByMovie(Movie findMovie) {
+        return cinema.findCinemaMovieByMovie(findMovie);
     }
 
     public boolean checkMoviePlays(Movie movie) {
