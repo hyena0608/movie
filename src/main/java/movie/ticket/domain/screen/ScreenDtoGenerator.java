@@ -1,6 +1,6 @@
-package movie.ticket.domain.cinema;
+package movie.ticket.domain.screen;
 
-import movie.ticket.dto.cinema.ScreenDto;
+import movie.ticket.dto.screen.ScreenDto;
 
 public class ScreenDtoGenerator {
 

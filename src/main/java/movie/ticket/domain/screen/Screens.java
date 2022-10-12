@@ -1,4 +1,4 @@
-package movie.ticket.domain.cinema;
+package movie.ticket.domain.screen;
 
 import java.util.Arrays;
 import java.util.Collection;

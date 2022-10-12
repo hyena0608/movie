@@ -7,17 +7,17 @@ import static movie.ticket.view.input.exception.ScreenMenuException.SCREEN_MENU_
 import static movie.ticket.view.input.util.RegexUtil.REGEX_NUMBER_FORM;
 import static movie.ticket.view.input.util.RegexUtil.checkRegex;
 
-public class ScreenControllerInputView {
+public class CinemaControllerInputView {
     
-    public static NumberForm askScreen() {
-        String screenNumber = read();
-        if (!checkScreenNumber(screenNumber)) {
+    public static NumberForm askCinema() {
+        String cinemaNumber = read();
+        if (!checkCinemaNumber(cinemaNumber)) {
             throw new NullPointerException(SCREEN_MENU_FORM_EXCEPTION.message);
         }
-        return new NumberForm(screenNumber);
+        return new NumberForm(cinemaNumber);
     }
 
-    private static boolean checkScreenNumber(String screenNumber) {
-        return screenNumber.length() != 0 && checkRegex(REGEX_NUMBER_FORM, screenNumber);
+    private static boolean checkCinemaNumber(String cinemaNumber) {
+        return cinemaNumber.length() != 0 && checkRegex(REGEX_NUMBER_FORM, cinemaNumber);
     }
 }

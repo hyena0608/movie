@@ -1,4 +1,4 @@
-package movie.ticket.dto.cinema;
+package movie.ticket.dto.screen;
 
 public class ScreenDto {
 

@@ -1,8 +1,8 @@
 package movie.ticket.controller;
 
-import movie.ticket.domain.cinema.ScreenDtoGenerator;
-import movie.ticket.domain.cinema.Screens;
-import movie.ticket.dto.cinema.ScreenDto;
+import movie.ticket.domain.screen.ScreenDtoGenerator;
+import movie.ticket.domain.screen.Screens;
+import movie.ticket.dto.screen.ScreenDto;
 import movie.ticket.view.input.controller.ScreenControllerInputView;
 import movie.ticket.view.output.controller.ScreenControllerOutputView;
 
@@ -15,11 +15,12 @@ public class ScreenController {
     private final ScreenControllerInputView inputView = new ScreenControllerInputView();
     private final ScreenControllerOutputView outputView = new ScreenControllerOutputView();
 
-    public void cinemaListUp() {
-        Collection<Screens> findAllScreens = Screens.findAllCinemas();
-        List<ScreenDto> screenDtos = findAllScreens.stream()
-                .map(ScreenDtoGenerator::toScreenDto)
-                .collect(Collectors.toUnmodifiableList());
+    public void screenListUp() {
+        List<ScreenDto> screenDtos =
+                Screens.findAllCinemas()
+                        .stream()
+                        .map(ScreenDtoGenerator::toScreenDto)
+                        .collect(Collectors.toUnmodifiableList());
 
         outputView.responseScreenListUp(screenDtos);
     }
