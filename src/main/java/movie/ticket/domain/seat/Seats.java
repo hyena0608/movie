@@ -1,20 +1,18 @@
 package movie.ticket.domain.seat;
 
-import movie.ticket.exception.SeatException;
-
 import java.util.Map;
 
 import static movie.ticket.exception.SeatException.*;
 
-public class Seat {
+public class Seats {
 
-    private final static int SEAT_ROW_SIZE = 10;
-    private final static int SEAR_COL_SIZE = 4;
-    private final static int ASCII_A = 65;
+    public static final int SEAT_ROW_SIZE = 10;
+    public static final int SEAR_COL_SIZE = 4;
+    public static final int ASCII_A = 65;
 
     private final Map<String, Boolean> seats;
 
-    public Seat(Map<String, Boolean> seats) {
+    public Seats(Map<String, Boolean> seats) {
         this.seats = seats;
         initSeat();
     }
@@ -25,6 +23,10 @@ public class Seat {
                 seats.put(createSeatName(row, col), false);
             }
         }
+    }
+
+    public Map<String, Boolean> getAllSeats() {
+        return seats;
     }
 
     private String createSeatName(int row, int col) {
@@ -41,4 +43,9 @@ public class Seat {
     private boolean checkSeat(String seatName) {
         return seats.get(seatName);
     }
+
+     Map<String, Boolean> getSeats() {
+        return seats;
+    }
+
 }

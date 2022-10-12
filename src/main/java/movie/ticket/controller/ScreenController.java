@@ -6,7 +6,6 @@ import movie.ticket.dto.screen.ScreenDto;
 import movie.ticket.view.input.controller.ScreenControllerInputView;
 import movie.ticket.view.output.controller.ScreenControllerOutputView;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
