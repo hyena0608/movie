@@ -2,6 +2,7 @@ package movie.ticket.domain.cinema;
 
 import movie.ticket.domain.movie.Movie;
 import movie.ticket.domain.screen.Screens;
+import movie.ticket.domain.showtime.ShowTimes;
 
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class CinemaMovie {
         this.movie = movie;
         this.screens = screens;
         this.timeTable = timeTable;
+    }
+
+    public List<ShowTimes> loadPossibleShowTimes() {
+        return timeTable.loadPossibleShowTimes();
     }
 
     public List<Screens> loadScreens() {
