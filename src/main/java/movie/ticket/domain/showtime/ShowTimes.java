@@ -1,9 +1,14 @@
 package movie.ticket.domain.showtime;
 
+import movie.ticket.exception.ShowTimeException;
+
 import java.sql.Time;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static movie.ticket.exception.ShowTimeException.*;
 
 public enum ShowTimes {
 
@@ -21,9 +26,11 @@ public enum ShowTimes {
         this.showTimeName = showTimeName;
     }
 
-    public static Collection<ShowTimes> findAllShowTimes() {
+    public static ShowTimes findShowTimeById(Long id) {
         return Arrays.stream(ShowTimes.values())
-                .collect(Collectors.toUnmodifiableList());
+                .filter(showTime -> Objects.equals(showTime.showTimeId, id))
+                .findFirst()
+                .orElseThrow(() -> new NullPointerException(SHOW_TIME_NOT_FOUND_EXCEPTION.message));
     }
 
     Long getShowTimeId() {

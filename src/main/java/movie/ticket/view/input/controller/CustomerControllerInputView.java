@@ -10,7 +10,7 @@ public class CustomerControllerInputView {
     private static final int CUSTOMER_NUMBER_PARSE_INDEX = 0;
     private static final int HEADCOUNT_PARSE_INDEX = 1;
 
-    public static CustomerForm askCustomer() {
+    public CustomerForm askCustomer() {
         CustomerForm customerForm = new CustomerForm();
 
         while (true) {
@@ -35,11 +35,11 @@ public class CustomerControllerInputView {
         return customerForm;
     }
 
-    private static String[] splitCommand(String commands) {
+    private String[] splitCommand(String commands) {
         return commands.split("");
     }
 
-    private static String parseCommand(String command) {
+    private String parseCommand(String command) {
         return command.replace(",", " ").trim();
     }
 }

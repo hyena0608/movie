@@ -1,5 +1,6 @@
 package movie.ticket.controller;
 
+import movie.ticket.QueryContainer;
 import movie.ticket.domain.customer.CustomerDtoGenerator;
 import movie.ticket.domain.customer.Customers;
 import movie.ticket.dto.customer.CustomerDto;
@@ -13,6 +14,12 @@ public class CustomerController {
 
     private final CustomerControllerInputView inputView = new CustomerControllerInputView();
     private final CustomerControllerOutputView outputView = new CustomerControllerOutputView();
+
+    public void askCustomer() {
+        QueryContainer.saveCustomerQuery(
+                inputView.askCustomer()
+        );
+    }
 
     public void customerListUp() {
         List<CustomerDto> findAllCustomers = Customers.findAllCustomers()
