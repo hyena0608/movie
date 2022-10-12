@@ -1,5 +1,6 @@
 package movie.ticket.controller;
 
+import movie.ticket.QueryContainer;
 import movie.ticket.domain.movie.Movie;
 import movie.ticket.domain.movie.MovieDtoGenerator;
 import movie.ticket.dto.movie.MovieDto;
@@ -18,7 +19,9 @@ public class MovieController {
     private final MovieRepository movieRepository = new MovieRepository();
 
     public void askMovie() {
-
+        QueryContainer.saveMovieQuery(
+                inputView.askMovie()
+        );
     }
 
     public void movieListUp() {

@@ -1,5 +1,7 @@
 package movie.ticket.domain.movie;
 
+import java.util.Objects;
+
 public class Movie {
 
     private final Long id;
@@ -8,6 +10,10 @@ public class Movie {
     public Movie(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public boolean checkSame(Long id) {
+        return Objects.equals(this.id, id);
     }
 
     Long getId() {

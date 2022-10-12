@@ -1,6 +1,7 @@
 package movie.ticket;
 
 import movie.ticket.controller.*;
+import movie.ticket.form.NumberForm;
 
 public class MovieTicketApplication {
 
@@ -11,7 +12,9 @@ public class MovieTicketApplication {
     private static final CustomerController customerController = new CustomerController();
 
     public static void main(String[] args) {
+        movieController.askMovie();
         movieController.movieListUp();
+        cinemaController.askCinema();
         cinemaController.cinemaListUp();
         screenController.screenListUp();
         showTimeController.showTimeListUp();
@@ -19,3 +22,4 @@ public class MovieTicketApplication {
     }
 
 }
+

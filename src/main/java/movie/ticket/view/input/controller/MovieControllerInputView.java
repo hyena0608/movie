@@ -9,7 +9,7 @@ import static movie.ticket.view.input.util.RegexUtil.checkRegex;
 
 public class MovieControllerInputView {
 
-    public static NumberForm askMovie() {
+    public NumberForm askMovie() {
         String movieNumber = read();
         if (!checkMovieNumber(movieNumber)) {
             throw new NullPointerException(MOVIE_MENU_FORM_EXCEPTION.message);
@@ -17,7 +17,7 @@ public class MovieControllerInputView {
         return new NumberForm(movieNumber);
     }
 
-    private static boolean checkMovieNumber(String movieNumber) {
+    private boolean checkMovieNumber(String movieNumber) {
         return movieNumber.length() != 0 && checkRegex(REGEX_NUMBER_FORM, movieNumber);
     }
 }
