@@ -1,4 +1,4 @@
-package movie.ticket.domain.showtime;
+package movie.ticket.dto.showtime;
 
 import java.sql.Time;
 

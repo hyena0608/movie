@@ -1,20 +1,20 @@
-package movie.ticket.domain.movie;
+package movie.ticket.dto.movie;
 
-public class Movie {
+public class MovieDto {
 
     private final Long id;
     private final String name;
 
-    public Movie(Long id, String name) {
+    public MovieDto(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    Long getId() {
+    public Long getId() {
         return id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 }

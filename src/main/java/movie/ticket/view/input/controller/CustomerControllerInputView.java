@@ -1,11 +1,11 @@
-package movie.ticket.view.input.menu;
+package movie.ticket.view.input.controller;
 
 import movie.ticket.form.CustomerForm;
 
 import static movie.ticket.view.input.InputView.read;
 import static movie.ticket.view.input.exception.ShowTimeMenuException.SHOWTIME_MENU_FORM_EXCEPTION;
 
-public class CustomerMenuInView {
+public class CustomerControllerInputView {
 
     private static final int CUSTOMER_NUMBER_PARSE_INDEX = 0;
     private static final int HEADCOUNT_PARSE_INDEX = 1;

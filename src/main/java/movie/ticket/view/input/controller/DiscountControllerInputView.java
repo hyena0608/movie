@@ -1,4 +1,4 @@
-package movie.ticket.view.input.menu;
+package movie.ticket.view.input.controller;
 
 import movie.ticket.form.NumberForm;
 
@@ -7,7 +7,7 @@ import static movie.ticket.view.input.exception.DiscountMenuException.*;
 import static movie.ticket.view.input.util.RegexUtil.REGEX_NUMBER_FORM;
 import static movie.ticket.view.input.util.RegexUtil.checkRegex;
 
-public class DiscountMenuInView {
+public class DiscountControllerInputView {
 
     public static NumberForm askDiscount() {
         String discountNumber = read();
