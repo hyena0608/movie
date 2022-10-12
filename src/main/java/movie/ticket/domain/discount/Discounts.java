@@ -13,4 +13,12 @@ public enum Discounts {
         this.discountId = discountId;
         this.discountName = discountName;
     }
+
+    Long getDiscountId() {
+        return discountId;
+    }
+
+    String getDiscountName() {
+        return discountName;
+    }
 }

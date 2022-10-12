@@ -9,7 +9,7 @@ import static movie.ticket.view.input.util.RegexUtil.checkRegex;
 
 public class DiscountControllerInputView {
 
-    public static NumberForm askDiscount() {
+    public NumberForm askDiscount() {
         String discountNumber = read();
         if (!checkDiscountNumber(discountNumber)) {
             throw new NullPointerException(DISCOUNT_MENU_FORM_EXCEPTION.message);
@@ -17,7 +17,7 @@ public class DiscountControllerInputView {
         return new NumberForm(discountNumber);
     }
 
-    private static boolean checkDiscountNumber(String discountNumber) {
+    private boolean checkDiscountNumber(String discountNumber) {
         return discountNumber.length() != 0 && checkRegex(REGEX_NUMBER_FORM, discountNumber);
     }
 }

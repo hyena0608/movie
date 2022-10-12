@@ -1,11 +1,11 @@
 package movie.ticket.domain.customer;
 
-import movie.ticket.dto.customer.CustomerDto;
+import movie.ticket.dto.customer.CustomersDto;
 
 public class CustomerDtoGenerator {
 
-    public static CustomerDto toCustomerDto(Customers customer) {
-        return new CustomerDto(
+    public static CustomersDto toCustomersDto(Customers customer) {
+        return new CustomersDto(
                 customer.getCustomerId(),
                 customer.getCustomerName()
         );

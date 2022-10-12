@@ -1,11 +1,11 @@
-package movie.ticket.dto.customer;
+package movie.ticket.dto.discount;
 
-public class CustomerDto {
+public class DiscountDto {
 
     private final Long id;
     private final String name;
 
-    public CustomerDto(Long id, String name) {
+    public DiscountDto(Long id, String name) {
         this.id = id;
         this.name = name;
     }

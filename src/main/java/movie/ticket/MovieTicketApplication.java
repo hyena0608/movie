@@ -10,6 +10,7 @@ public class MovieTicketApplication {
     private static final ShowTimeController showTimeController = new ShowTimeController();
     private static final CustomerController customerController = new CustomerController();
     private static final SeatController seatController = new SeatController();
+    private static final DiscountController discountController = new DiscountController();
 
     public static void main(String[] args) {
         movieController.movieListUp();
@@ -29,6 +30,9 @@ public class MovieTicketApplication {
 
         seatController.seatListUp();
         seatController.askSeats();
+
+        discountController.discountListUp();
+        discountController.askDiscount();
     }
 
 }

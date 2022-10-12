@@ -9,6 +9,7 @@ public class QueryContainer {
     private static NumberForm cinemaQuery;
     private static NumberForm screenQuery;
     private static NumberForm showTimeQuery;
+    private static NumberForm discountQuery;
     private static CustomerForm customerQuery;
     private static SeatsForm seatsQuery;
 
@@ -42,6 +43,14 @@ public class QueryContainer {
 
     public static void saveShowTimeQuery(NumberForm showTimeQuery) {
         QueryContainer.showTimeQuery = showTimeQuery;
+    }
+
+    public static NumberForm getDiscountQuery() {
+        return discountQuery;
+    }
+
+    public static void saveDiscountQuery(NumberForm discountQuery) {
+        QueryContainer.discountQuery = discountQuery;
     }
 
     public static CustomerForm getCustomerQuery() {

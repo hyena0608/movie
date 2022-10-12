@@ -3,7 +3,7 @@ package movie.ticket.controller;
 import movie.ticket.QueryContainer;
 import movie.ticket.domain.customer.CustomerDtoGenerator;
 import movie.ticket.domain.customer.Customers;
-import movie.ticket.dto.customer.CustomerDto;
+import movie.ticket.dto.customer.CustomersDto;
 import movie.ticket.view.input.controller.CustomerControllerInputView;
 import movie.ticket.view.output.controller.CustomerControllerOutputView;
 
@@ -22,9 +22,9 @@ public class CustomerController {
     }
 
     public void customerListUp() {
-        List<CustomerDto> findAllCustomers = Customers.findAllCustomers()
+        List<CustomersDto> findAllCustomers = Customers.findAllCustomers()
                 .stream()
-                .map(CustomerDtoGenerator::toCustomerDto)
+                .map(CustomerDtoGenerator::toCustomersDto)
                 .collect(Collectors.toUnmodifiableList());
 
         outputView.responseCustomerListUp(findAllCustomers);
