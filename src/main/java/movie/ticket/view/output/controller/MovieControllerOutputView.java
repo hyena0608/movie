@@ -1,11 +1,10 @@
 package movie.ticket.view.output.controller;
 
 import movie.ticket.dto.movie.MovieDto;
-import movie.ticket.view.output.OutputView;
 
 import java.util.List;
 
-import static movie.ticket.view.output.OutputView.*;
+import static movie.ticket.view.output.OutputView.print;
 import static movie.ticket.view.output.UnitMessage.*;
 
 public class MovieControllerOutputView {
