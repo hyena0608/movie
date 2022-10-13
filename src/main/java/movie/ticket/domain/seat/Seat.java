@@ -8,7 +8,11 @@ public class Seat {
         this.seat = seat;
     }
 
-    public boolean checkSame(Seat findSeat) {
-        return this.seat.equals(findSeat.seat);
+    public String loadSeat() {
+        return seat;
+    }
+
+    public boolean checkSame(Seat seat) {
+        return this.seat.equals(seat.seat);
     }
 }

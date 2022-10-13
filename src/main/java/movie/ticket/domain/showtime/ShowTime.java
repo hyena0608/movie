@@ -4,7 +4,7 @@ import java.sql.Time;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static movie.ticket.exception.ShowTimeException.*;
+import static movie.ticket.exception.ShowTimeException.SHOW_TIME_NOT_FOUND_EXCEPTION;
 
 public enum ShowTime {
 

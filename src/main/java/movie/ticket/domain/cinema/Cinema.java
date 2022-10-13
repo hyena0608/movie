@@ -18,7 +18,7 @@ public class Cinema {
     public boolean checkMoviePlays(Movie findMovie) {
         return movies.values()
                 .stream()
-                .anyMatch(movie -> movie.equals(findMovie));
+                .anyMatch(movie -> movie.checkSameMovie(findMovie));
     }
 
     public CinemaMovie findCinemaMovieByMovie(Movie findMovie) {
@@ -27,5 +27,9 @@ public class Cinema {
                 .filter(movie -> movie.checkSameMovie(findMovie))
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException(CINEMA_NOT_FOUND_EXCEPTION.message));
+    }
+
+    public void reflectCinemaMovie(CinemaMovie cinemaMovie) {
+        movies.put((long) (movies.size() + 1), cinemaMovie);
     }
 }

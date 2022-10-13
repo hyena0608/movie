@@ -5,8 +5,8 @@ import movie.ticket.domain.customer.Customer;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.Long.*;
-import static movie.ticket.domain.customer.Customer.*;
+import static java.lang.Long.parseLong;
+import static movie.ticket.domain.customer.Customer.findCustomerById;
 
 public class CustomerForm {
 
@@ -17,7 +17,7 @@ public class CustomerForm {
     }
 
     public void reflectCustomer(String customerNumber, String headCount) {
-        Customer findCustomer = findCustomerByNumber(parseLong(customerNumber));
+        Customer findCustomer = findCustomerById(parseLong(customerNumber));
 
         customerForms.put(
                 findCustomer,

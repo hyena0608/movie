@@ -36,10 +36,7 @@ public class CinemaMovie {
     }
 
     public boolean checkSameMovie(Movie findMovie) {
-        return movie.equals(findMovie);
+        return movie.loadMovieName().equals(findMovie.loadMovieName());
     }
 
-    public String loadMovieTitle() {
-        return movie.loadMovieName();
-    }
 }

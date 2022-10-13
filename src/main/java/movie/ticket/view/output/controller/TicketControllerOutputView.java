@@ -1,6 +1,7 @@
 package movie.ticket.view.output.controller;
 
 import movie.ticket.domain.customer.Customer;
+import movie.ticket.domain.discount.CustomerDiscount;
 import movie.ticket.domain.discount.factory.Discount;
 import movie.ticket.domain.screen.Screen;
 import movie.ticket.dto.customer.CustomersDto;
@@ -39,25 +40,39 @@ public class TicketControllerOutputView {
 
         List<List<CustomersDto>> gatheredByCustomerType = gatherCustomersByCustomerType(ticketDtos);
         int findMoviePrice = getMoviePrice(ticketScreen);
-        int couponDiscountPrice = getCouponDiscountPrice(ticketDtos, couponDiscount);
         int totalTicketPrice = getTotalTicketPrice(ticketDtos);
+        int totalCouponDiscountedPrice = couponDiscount.discount(findMoviePrice).intValue() * ticketDtos.size();
+        Integer totalCustomerDiscountPrice = totalTicketPrice;
+
+        for (List<CustomersDto> customers : gatheredByCustomerType) {
+            int customersSize = customers.size();
+            if (customersSize != 0) {
+                Long findId = customers.get(0).getId();
+                Customer findCustomer = Customer.findCustomerById(findId);
+                int discountedPrice = findMoviePrice - CustomerDiscount.discount(
+                        findCustomer.loadCustomerDiscountType(),
+                        findMoviePrice
+                ) * customersSize;
+
+                totalCustomerDiscountPrice -= discountedPrice;
+            }
+        }
 
         StringBuilder textBuilder = new StringBuilder();
         appendAnnounceText(textBuilder);
         appendMovieName(ticketMovie, textBuilder);
         appendShowTime(ticketShowTime, textBuilder);
-        textBuilder.append(TICKET_TEXT_DISCOUNT_HISTORY)
-                        .append(ENTER.unit);
+        textBuilder.append(TICKET_TEXT_DISCOUNT_HISTORY).append(ENTER.unit);
         appendCustomerDiscountHistory(gatheredByCustomerType, findMoviePrice, textBuilder);
-        appendCouponDiscountHistory(ticketDtos, couponDiscount, couponDiscountPrice, textBuilder);
-        appendTotalTicketPrice(totalTicketPrice, textBuilder);
+        appendCouponDiscountHistory(ticketDtos, couponDiscount, totalCouponDiscountedPrice, textBuilder);
+        appendTotalTicketPrice(totalCustomerDiscountPrice, textBuilder);
 
         return textBuilder.toString();
     }
 
-    private void appendTotalTicketPrice(int totalTicketPrice, StringBuilder textBuilder) {
+    private void appendTotalTicketPrice(int totalCustomerDiscountPrice, StringBuilder textBuilder) {
         textBuilder.append(TICKET_TEXT_TOTAL_PRICE)
-                .append(totalTicketPrice)
+                .append(totalCustomerDiscountPrice)
                 .append(WON.unit)
                 .append(ENTER.unit);
     }
@@ -79,14 +94,17 @@ public class TicketControllerOutputView {
                 .append(ENTER.unit);
     }
 
-    private void appendCouponDiscountHistory(List<TicketDto> ticketDtos, Discount couponDiscount, int couponDiscountPrice, StringBuilder textBuilder) {
+    private void appendCouponDiscountHistory(List<TicketDto> ticketDtos,
+                                             Discount couponDiscount,
+                                             int totalCouponDiscountPrice,
+                                             StringBuilder textBuilder) {
         textBuilder.append(COUPON_DISCOUNT)
                 .append(couponDiscount.loadDiscountName())
                 .append(SPACE.unit)
                 .append(ticketDtos.size())
-                .append(PEOPLE_COUNT)
+                .append(PEOPLE_COUNT.unit)
                 .append(SPACE.unit)
-                .append(couponDiscountPrice)
+                .append(totalCouponDiscountPrice)
                 .append(WON.unit)
                 .append(ENTER.unit);
     }
@@ -97,9 +115,15 @@ public class TicketControllerOutputView {
         textBuilder.append(CUSTOMER_DISCOUNT);
         gatheredByCustomerType.forEach(customers -> {
             int customersSize = customers.size();
-            int discountedPrice = findMoviePrice * customersSize;
 
             if (checkCustomerTypeExists(customersSize)) {
+                Long findId = customers.get(0).getId();
+                Customer findCustomer = Customer.findCustomerById(findId);
+                int discountedPrice = findMoviePrice - CustomerDiscount.discount(
+                        findCustomer.loadCustomerDiscountType(),
+                        findMoviePrice
+                ) * customersSize;
+
                 textBuilder.append(customers.get(0).getName())
                         .append(SPACE.unit)
                         .append(customersSize)
@@ -128,10 +152,6 @@ public class TicketControllerOutputView {
         return ticketDtos.stream()
                 .mapToInt(TicketDto::getPrice)
                 .sum();
-    }
-
-    private int getCouponDiscountPrice(List<TicketDto> ticketDtos, Discount couponDiscount) {
-        return (int) (ticketDtos.size() * couponDiscount.loadDiscountValue());
     }
 
     private boolean checkCustomerTypeExists(int customersSize) {

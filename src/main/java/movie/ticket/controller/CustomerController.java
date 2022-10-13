@@ -1,8 +1,8 @@
 package movie.ticket.controller;
 
 import movie.ticket.QueryContainer;
-import movie.ticket.domain.customer.CustomerDtoGenerator;
 import movie.ticket.domain.customer.Customer;
+import movie.ticket.domain.customer.CustomerDtoGenerator;
 import movie.ticket.dto.customer.CustomersDto;
 import movie.ticket.view.input.controller.CustomerControllerInputView;
 import movie.ticket.view.output.controller.CustomerControllerOutputView;

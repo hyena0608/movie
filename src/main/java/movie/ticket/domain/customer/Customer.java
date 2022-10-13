@@ -1,7 +1,5 @@
 package movie.ticket.domain.customer;
 
-import movie.ticket.domain.discount.CustomerDiscount;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
@@ -33,7 +31,7 @@ public enum Customer {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static Customer findCustomerByNumber(Long customerId) {
+    public static Customer findCustomerById(Long customerId) {
         return Arrays.stream(Customer.values())
                 .filter(customer -> Objects.equals(customer.customerId, customerId))
                 .findFirst()

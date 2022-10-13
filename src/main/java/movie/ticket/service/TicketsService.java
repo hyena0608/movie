@@ -4,8 +4,8 @@ import movie.ticket.QueryContainer;
 import movie.ticket.domain.cinema.CinemaMovie;
 import movie.ticket.domain.cinema.Cinemas;
 import movie.ticket.domain.customer.Customer;
-import movie.ticket.domain.discount.factory.DiscountFactory;
 import movie.ticket.domain.discount.factory.Discount;
+import movie.ticket.domain.discount.factory.DiscountFactory;
 import movie.ticket.domain.movie.Movie;
 import movie.ticket.domain.movie.Movies;
 import movie.ticket.domain.screen.Screen;
@@ -13,6 +13,7 @@ import movie.ticket.domain.seat.Seat;
 import movie.ticket.domain.showtime.ShowTime;
 import movie.ticket.ticket.Ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,18 +51,19 @@ public class TicketsService {
 
         List<Seat> findSeats = loadCinemaMovieSeats(queriedSeats, findCinemaMovie, findShowTime);
         List<Customer> loadedCustomers = loadCustomers(queriedCustomers);
-        List<Ticket> generatedTickets = IntStream.range(0, loadedCustomers.size())
-                .mapToObj(customerIndex ->
-                        new Ticket(
-                                loadedCustomers.get(customerIndex),
-                                findCinema,
-                                findScreen,
-                                findMovie,
-                                findShowTime,
-                                findSeats.get(customerIndex),
-                                findDiscount
-                        ))
-                .collect(Collectors.toUnmodifiableList());
+        List<Ticket> generatedTickets =
+                IntStream.range(0, loadedCustomers.size())
+                        .mapToObj(customerIndex -> {
+                            return new Ticket(
+                                    loadedCustomers.get(customerIndex),
+                                    findCinema,
+                                    findScreen,
+                                    findMovie,
+                                    findShowTime,
+                                    findSeats.get(customerIndex),
+                                    findDiscount
+                            );
+                        }).collect(Collectors.toUnmodifiableList());
 
         return generatedTickets;
     }
@@ -76,12 +78,12 @@ public class TicketsService {
     }
 
     private List<Customer> loadCustomers(Map<Customer, Integer> queriedCustomers) {
-        return queriedCustomers.keySet()
-                .stream()
-                .flatMap(queriedCustomer ->
-                        IntStream.range(0, queriedCustomers.get(queriedCustomer))
-                                .mapToObj(index -> queriedCustomer))
-                .collect(Collectors.toUnmodifiableList());
+        List<Customer> customers = new ArrayList<>();
+        queriedCustomers.forEach((key, value) ->
+                IntStream.range(0, value)
+                        .forEach(count -> customers.add(key)));
+
+        return customers;
     }
 
     private List<Seat> loadCinemaMovieSeats(List<Seat> queriedSeats, CinemaMovie findCinemaMovie, ShowTime findShowTime) {
@@ -89,7 +91,9 @@ public class TicketsService {
                 .loadAllSeats()
                 .keySet()
                 .stream()
-                .filter(queriedSeats::contains)
+                .filter(seat ->
+                        queriedSeats.stream()
+                                .anyMatch(queriedSeat -> queriedSeat.checkSame(seat)))
                 .collect(Collectors.toUnmodifiableList());
     }
 }

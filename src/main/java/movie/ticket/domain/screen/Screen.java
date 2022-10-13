@@ -1,13 +1,9 @@
 package movie.ticket.domain.screen;
 
-import movie.ticket.exception.ScreenException;
-
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-import static movie.ticket.exception.ScreenException.*;
+import static movie.ticket.exception.ScreenException.SCREEN_CAN_NOT_FIND_EXCEPTION;
 
 public enum Screen {
 

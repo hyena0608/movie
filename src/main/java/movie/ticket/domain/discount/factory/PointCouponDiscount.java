@@ -1,6 +1,6 @@
 package movie.ticket.domain.discount.factory;
 
-import static java.lang.String.*;
+import static java.lang.String.valueOf;
 
 public class PointCouponDiscount implements Discount {
 

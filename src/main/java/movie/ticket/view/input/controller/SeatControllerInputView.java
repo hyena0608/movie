@@ -31,7 +31,7 @@ public class SeatControllerInputView {
     }
 
     private String[] splitCommand(String commands) {
-        return commands.split("");
+        return commands.split(" ");
     }
 
     private String parseCommand(String command) {

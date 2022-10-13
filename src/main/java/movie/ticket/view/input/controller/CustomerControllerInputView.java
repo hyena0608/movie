@@ -17,7 +17,7 @@ public class CustomerControllerInputView {
 
             String customerInput = read();
 
-            if (customerInput.equals("")) {
+            if (customerInput.length() == 0) {
                 break;
             }
 
@@ -28,7 +28,7 @@ public class CustomerControllerInputView {
             customerForm.reflectCustomer(customerNumber, headCount);
         }
 
-        if (customerForm.checkForm()) {
+        if (!customerForm.checkForm()) {
             throw new NullPointerException(SHOWTIME_MENU_FORM_EXCEPTION.message);
         }
 
@@ -36,7 +36,7 @@ public class CustomerControllerInputView {
     }
 
     private String[] splitCommand(String commands) {
-        return commands.split("");
+        return commands.split(" ");
     }
 
     private String parseCommand(String command) {

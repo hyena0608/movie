@@ -23,7 +23,7 @@ public class SeatController {
 
     public void seatListUp() {
         Seats findSeats = seatsService.findPossibleSeats();
-        SeatsDto seatsDto = SeatsDtoGenerator.toSeatsDto(findSeats.loadAllSeats());
+        SeatsDto seatsDto = SeatsDtoGenerator.toSeatsDto(findSeats);
         outputView.responseSeatListUp(seatsDto);
     }
 

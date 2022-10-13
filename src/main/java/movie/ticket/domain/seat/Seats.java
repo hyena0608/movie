@@ -1,8 +1,10 @@
 package movie.ticket.domain.seat;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import static movie.ticket.exception.SeatException.*;
+import static movie.ticket.exception.SeatException.SEAT_ALREADY_FILLED_EXCEPTION;
 
 public class Seats {
 
@@ -11,9 +13,20 @@ public class Seats {
     public static final int ASCII_A = 65;
 
     private final Map<Seat, Boolean> seats;
+    private final Map<String, Seat> seatFinder;
 
-    public Seats(Map<Seat, Boolean> seats) {
-        this.seats = seats;
+    public Seats() {
+        this.seats = new HashMap<>();
+        initSeat();
+        this.seatFinder = createSeatFinder();
+    }
+
+    private Map<String, Seat> createSeatFinder() {
+        return seats.keySet()
+                .stream()
+                .collect(Collectors.toUnmodifiableMap(
+                        Seat::loadSeat,
+                        seat -> seat));
     }
 
     private void initSeat() {
@@ -30,22 +43,24 @@ public class Seats {
 
     private Seat createSeatName(int row, int col) {
         return new Seat(
-                String.valueOf(row) + (char) col
+                (char) col + String.valueOf(row)
         );
     }
 
     public void reflectSeat(Seat seat) {
-        if (checkSeat(seat)) {
+        Seat findSeat = seatFinder.get(seat.loadSeat());
+        if (!checkSeat(findSeat)) {
             throw new IllegalArgumentException(SEAT_ALREADY_FILLED_EXCEPTION.message);
         }
-        seats.put(seat, true);
+        seats.put(findSeat, true);
     }
 
     private boolean checkSeat(Seat seat) {
-        return seats.get(seat);
+        Seat findSeat = seatFinder.get(seat.loadSeat());
+        return seats.containsKey(findSeat);
     }
 
-     Map<Seat, Boolean> getSeats() {
+    Map<Seat, Boolean> getSeats() {
         return seats;
     }
 
