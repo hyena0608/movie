@@ -4,7 +4,7 @@ import movie.ticket.QueryContainer;
 import movie.ticket.domain.cinema.CinemaMovie;
 import movie.ticket.domain.cinema.Cinemas;
 import movie.ticket.domain.movie.Movie;
-import movie.ticket.domain.showtime.ShowTimes;
+import movie.ticket.domain.showtime.ShowTime;
 import movie.ticket.repository.MovieRepository;
 
 import java.util.Collection;
@@ -13,7 +13,7 @@ public class ShowTimeService {
 
     private final MovieRepository movieRepository = new MovieRepository();
 
-    public Collection<ShowTimes> findAllPossibleShowTimes() {
+    public Collection<ShowTime> findAllPossibleShowTimes() {
         Long movieId = Long.parseLong(QueryContainer
                                         .getMovieQuery()
                                         .getSelectedMenu());

@@ -5,7 +5,7 @@ import movie.ticket.domain.cinema.CinemaMovie;
 import movie.ticket.domain.cinema.Cinemas;
 import movie.ticket.domain.movie.Movie;
 import movie.ticket.domain.seat.Seats;
-import movie.ticket.domain.showtime.ShowTimes;
+import movie.ticket.domain.showtime.ShowTime;
 import movie.ticket.form.SeatsForm;
 import movie.ticket.repository.MovieRepository;
 
@@ -27,7 +27,7 @@ public class SeatsService {
         Movie findMovie = movieRepository.findMovieById(movieId);
         Cinemas findCinema = Cinemas.findCinemaById(cinemaId);
         CinemaMovie findCinemaMovie = findCinema.findCinemaMovieTypeByMovie(findMovie);
-        ShowTimes findShowTime = ShowTimes.findShowTimeById(showTimeId);
+        ShowTime findShowTime = ShowTime.findShowTimeById(showTimeId);
         Seats findSeats = findCinemaMovie.loadSeatsByShowTime(findShowTime);
 
         return findSeats;
@@ -48,7 +48,7 @@ public class SeatsService {
         Movie findMovie = movieRepository.findMovieById(movieId);
         Cinemas findCinema = Cinemas.findCinemaById(cinemaId);
         CinemaMovie findCinemaMovie = findCinema.findCinemaMovieTypeByMovie(findMovie);
-        ShowTimes findShowTime = ShowTimes.findShowTimeById(showTimeId);
+        ShowTime findShowTime = ShowTime.findShowTimeById(showTimeId);
         Seats findSeats = findCinemaMovie.loadSeatsByShowTime(findShowTime);
 
         seatsForm.getSeatNumbers()

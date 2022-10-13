@@ -2,9 +2,12 @@ package movie.ticket.domain.cinema;
 
 import movie.ticket.domain.movie.Movie;
 import movie.ticket.exception.CinemaException;
+import movie.ticket.ticket.Ticket;
+import movie.ticket.ticket.Tickets;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -12,18 +15,21 @@ import static movie.ticket.exception.CinemaException.*;
 
 public enum Cinemas {
 
-    KANGNAM(1L, "강남", new Cinema()),
-    KAGNBYEON(2L, "강변", new Cinema()),
-    KYUNKUK(3L, "건국", new Cinema());
+    KANGNAM(1L, "강남", new Cinema(), new Tickets()),
+    KAGNBYEON(2L, "강변", new Cinema(), new Tickets()),
+    KYUNKUK(3L, "건국", new Cinema(), new Tickets());
 
     private final Long cinemaId;
     private final String cinemaName;
     private final Cinema cinema;
 
-    Cinemas(Long cinemaId, String cinemaName, Cinema cinema) {
+    private final Tickets tickets;
+
+    Cinemas(Long cinemaId, String cinemaName, Cinema cinema, Tickets tickets) {
         this.cinemaId = cinemaId;
         this.cinemaName = cinemaName;
         this.cinema = cinema;
+        this.tickets = tickets;
     }
 
     public static Collection<Cinemas> findAllCinemas() {
@@ -47,6 +53,10 @@ public enum Cinemas {
 
     public CinemaMovie findCinemaMovieTypeByMovie(Movie findMovie) {
         return cinema.findCinemaMovieByMovie(findMovie);
+    }
+
+    public void reflectTickets(List<Ticket> purchasedTickets) {
+        purchasedTickets.forEach(this.tickets::reflectTicket);
     }
 
     public boolean checkMoviePlays(Movie movie) {

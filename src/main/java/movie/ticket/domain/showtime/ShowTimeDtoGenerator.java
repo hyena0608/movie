@@ -4,7 +4,7 @@ import movie.ticket.dto.showtime.ShowTimeDto;
 
 public class ShowTimeDtoGenerator {
 
-    public static ShowTimeDto toShowTimeDto(ShowTimes showTime) {
+    public static ShowTimeDto toShowTimeDto(ShowTime showTime) {
         return new ShowTimeDto(
                 showTime.getShowTimeId(),
                 showTime.getTime(),

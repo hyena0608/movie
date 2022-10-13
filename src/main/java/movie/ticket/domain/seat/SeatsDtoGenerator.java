@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class SeatsDtoGenerator {
 
-    public static SeatsDto toSeatsDto(Map<String, Boolean> seats) {
+    public static SeatsDto toSeatsDto(Map<Seat, Boolean> seats) {
         return new SeatsDto(seats);
     }
 }

@@ -16,6 +16,10 @@ public class Movie {
         return Objects.equals(this.id, id);
     }
 
+    public String loadMovieName() {
+        return this.name;
+    }
+
     Long getId() {
         return id;
     }

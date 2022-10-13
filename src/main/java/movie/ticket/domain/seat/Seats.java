@@ -10,11 +10,10 @@ public class Seats {
     public static final int SEAR_COL_SIZE = 4;
     public static final int ASCII_A = 65;
 
-    private final Map<String, Boolean> seats;
+    private final Map<Seat, Boolean> seats;
 
-    public Seats(Map<String, Boolean> seats) {
+    public Seats(Map<Seat, Boolean> seats) {
         this.seats = seats;
-        initSeat();
     }
 
     private void initSeat() {
@@ -25,26 +24,28 @@ public class Seats {
         }
     }
 
-    public Map<String, Boolean> getAllSeats() {
+    public Map<Seat, Boolean> loadAllSeats() {
         return seats;
     }
 
-    private String createSeatName(int row, int col) {
-        return String.valueOf(row) + (char) col;
+    private Seat createSeatName(int row, int col) {
+        return new Seat(
+                String.valueOf(row) + (char) col
+        );
     }
 
-    public void reflectSeat(String seatName) {
-        if (checkSeat(seatName)) {
+    public void reflectSeat(Seat seat) {
+        if (checkSeat(seat)) {
             throw new IllegalArgumentException(SEAT_ALREADY_FILLED_EXCEPTION.message);
         }
-        seats.put(seatName, true);
+        seats.put(seat, true);
     }
 
-    private boolean checkSeat(String seatName) {
-        return seats.get(seatName);
+    private boolean checkSeat(Seat seat) {
+        return seats.get(seat);
     }
 
-     Map<String, Boolean> getSeats() {
+     Map<Seat, Boolean> getSeats() {
         return seats;
     }
 

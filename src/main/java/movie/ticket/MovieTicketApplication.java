@@ -11,6 +11,7 @@ public class MovieTicketApplication {
     private static final CustomerController customerController = new CustomerController();
     private static final SeatController seatController = new SeatController();
     private static final DiscountController discountController = new DiscountController();
+    private static final TicketsController ticketsController = new TicketsController();
 
     public static void main(String[] args) {
         movieController.movieListUp();
@@ -33,6 +34,8 @@ public class MovieTicketApplication {
 
         discountController.discountListUp();
         discountController.askDiscount();
+
+        ticketsController.purchaseTickets();
     }
 
 }

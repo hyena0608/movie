@@ -1,9 +1,9 @@
 package movie.ticket.domain.cinema;
 
 import movie.ticket.domain.movie.Movie;
-import movie.ticket.domain.screen.Screens;
+import movie.ticket.domain.screen.Screen;
 import movie.ticket.domain.seat.Seats;
-import movie.ticket.domain.showtime.ShowTimes;
+import movie.ticket.domain.showtime.ShowTime;
 
 import java.util.List;
 
@@ -11,11 +11,11 @@ public class CinemaMovie {
 
     private final Long id;
     private final Movie movie;
-    private final List<Screens> screens;
+    private final List<Screen> screens;
     private final CinemaTimeTable timeTable;
     private final CinemaSeatTable seatTable;
 
-    public CinemaMovie(Long id, Movie movie, List<Screens> screens, CinemaTimeTable timeTable, CinemaSeatTable seatTable) {
+    public CinemaMovie(Long id, Movie movie, List<Screen> screens, CinemaTimeTable timeTable, CinemaSeatTable seatTable) {
         this.id = id;
         this.movie = movie;
         this.screens = screens;
@@ -23,19 +23,23 @@ public class CinemaMovie {
         this.seatTable = seatTable;
     }
 
-    public List<ShowTimes> loadPossibleShowTimes() {
+    public List<ShowTime> loadPossibleShowTimes() {
         return timeTable.loadPossibleShowTimes();
     }
 
-    public List<Screens> loadScreens() {
+    public List<Screen> loadScreens() {
         return screens;
     }
 
-    public Seats loadSeatsByShowTime(ShowTimes showTime) {
+    public Seats loadSeatsByShowTime(ShowTime showTime) {
         return seatTable.findSeatsByShowTimes(showTime);
     }
 
     public boolean checkSameMovie(Movie findMovie) {
         return movie.equals(findMovie);
+    }
+
+    public String loadMovieTitle() {
+        return movie.loadMovieName();
     }
 }

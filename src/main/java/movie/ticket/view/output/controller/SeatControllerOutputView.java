@@ -1,5 +1,6 @@
 package movie.ticket.view.output.controller;
 
+import movie.ticket.domain.seat.Seat;
 import movie.ticket.dto.seat.SeatsDto;
 
 import java.util.Map;
@@ -23,7 +24,7 @@ public class SeatControllerOutputView {
         textBuilder.append(ANNOUNCE_SELECT_SEATS)
                 .append(ENTER.unit);
 
-        Map<String, Boolean> seats = seatsDto.getSeats();
+        Map<Seat, Boolean> seats = seatsDto.getSeats();
 
         for (int col = 1; col <= seatsDto.getColSize(); col++) {
             char colType = getColSeatType(seatsDto, col);
@@ -32,7 +33,7 @@ public class SeatControllerOutputView {
                     .append(SPACE.unit);
 
             for (int row = 1; row <= seatsDto.getRowSize(); row++) {
-                String currentSeatKey = getSeatKey(colType, row);
+                Seat currentSeatKey = getSeatKey(colType, row);
                 if (checkAlreadyFilled(seats, currentSeatKey)) {
                     textBuilder.append(SEATED_VIEW)
                             .append(SPACE.unit);
@@ -54,11 +55,11 @@ public class SeatControllerOutputView {
         return (char) (seatsDto.getAsciiA() + col - 1);
     }
 
-    private String getSeatKey(char colType, int row) {
-        return String.valueOf(colType + row);
+    private Seat getSeatKey(char colType, int row) {
+        return new Seat(String.valueOf(colType + row));
     }
 
-    private Boolean checkAlreadyFilled(Map<String, Boolean> seats, String currentSeatType) {
+    private Boolean checkAlreadyFilled(Map<Seat, Boolean> seats, Seat currentSeatType) {
         return seats.get(currentSeatType);
     }
 }

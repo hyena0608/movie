@@ -21,8 +21,7 @@ public class DiscountControllerOutputView {
         textBuilder.append(ANNOUNCE_SELECT_DISCOUNT)
                 .append(ENTER.unit);
 
-        discountDtos.stream()
-                .forEach(discountDto ->
+        discountDtos.forEach(discountDto ->
                         textBuilder.append(discountDto.getId())
                                 .append(DOT.unit)
                                 .append(SPACE.unit)

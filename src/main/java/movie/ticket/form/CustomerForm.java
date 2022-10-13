@@ -1,23 +1,23 @@
 package movie.ticket.form;
 
-import movie.ticket.domain.customer.Customers;
+import movie.ticket.domain.customer.Customer;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.Long.*;
-import static movie.ticket.domain.customer.Customers.*;
+import static movie.ticket.domain.customer.Customer.*;
 
 public class CustomerForm {
 
-    private final Map<Customers, Integer> customerForms;
+    private final Map<Customer, Integer> customerForms;
 
     public CustomerForm() {
         this.customerForms = new HashMap<>();
     }
 
     public void reflectCustomer(String customerNumber, String headCount) {
-        Customers findCustomer = findCustomerByNumber(parseLong(customerNumber));
+        Customer findCustomer = findCustomerByNumber(parseLong(customerNumber));
 
         customerForms.put(
                 findCustomer,
@@ -28,5 +28,9 @@ public class CustomerForm {
 
     public boolean checkForm() {
         return customerForms.size() != 0;
+    }
+
+    public Map<Customer, Integer> loadCustomerForms() {
+        return customerForms;
     }
 }
