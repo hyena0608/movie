@@ -4,14 +4,12 @@ import movie.ticket.QueryContainer;
 import movie.ticket.domain.cinema.CinemaMovie;
 import movie.ticket.domain.cinema.Cinemas;
 import movie.ticket.domain.movie.Movie;
+import movie.ticket.domain.movie.Movies;
 import movie.ticket.domain.screen.Screen;
-import movie.ticket.repository.MovieRepository;
 
 import java.util.Collection;
 
 public class ScreenService {
-
-    private final MovieRepository movieRepository = new MovieRepository();
 
     public Collection<Screen> findAllScreensWhereCinemaPlays() {
         Long movieId = Long.parseLong(QueryContainer
@@ -21,7 +19,7 @@ public class ScreenService {
                                         .getCinemaQuery()
                                         .getSelectedMenu());
 
-        Movie findMovie = movieRepository.findMovieById(movieId);
+        Movie findMovie = Movies.findMovieById(movieId);
         Cinemas findCinema = Cinemas.findCinemaById(cinemaId);
         CinemaMovie findCinemaMovie = findCinema.findCinemaMovieTypeByMovie(findMovie);
 

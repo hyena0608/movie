@@ -1,7 +1,6 @@
-package movie.ticket.repository;
+package movie.ticket.domain.movie;
 
-import movie.ticket.domain.movie.Movie;
-
+import javax.swing.*;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,18 +8,24 @@ import java.util.stream.Collectors;
 
 import static movie.ticket.exception.MovieException.MOVIE_NOT_FOUND_EXCEPTION;
 
-public class MovieRepository {
+public enum Movies {
 
-    private static final Map<Long, Movie> movies = new HashMap<>();
+    MOVIES(new HashMap<>());
 
-    public Collection<Movie> findAllMovies() {
-        return movies.values()
+    private final Map<Long, Movie> movies;
+
+    Movies(Map<Long, Movie> movies) {
+        this.movies = movies;
+    }
+
+    public static Collection<Movie> findAllMovies() {
+        return MOVIES.movies.values()
                 .stream()
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Movie findMovieById(Long id) {
-        return movies.values()
+    public static Movie findMovieById(Long id) {
+        return MOVIES.movies.values()
                 .stream()
                 .filter(movie -> movie.checkSame(id))
                 .findFirst()

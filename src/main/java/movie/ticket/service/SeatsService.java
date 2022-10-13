@@ -4,14 +4,12 @@ import movie.ticket.QueryContainer;
 import movie.ticket.domain.cinema.CinemaMovie;
 import movie.ticket.domain.cinema.Cinemas;
 import movie.ticket.domain.movie.Movie;
+import movie.ticket.domain.movie.Movies;
 import movie.ticket.domain.seat.Seats;
 import movie.ticket.domain.showtime.ShowTime;
 import movie.ticket.form.SeatsForm;
-import movie.ticket.repository.MovieRepository;
 
 public class SeatsService {
-
-    private final MovieRepository movieRepository = new MovieRepository();
 
     public Seats findPossibleSeats() {
         Long movieId = Long.parseLong(QueryContainer
@@ -24,7 +22,7 @@ public class SeatsService {
                 .getShowTimeQuery()
                 .getSelectedMenu());
 
-        Movie findMovie = movieRepository.findMovieById(movieId);
+        Movie findMovie = Movies.findMovieById(movieId);
         Cinemas findCinema = Cinemas.findCinemaById(cinemaId);
         CinemaMovie findCinemaMovie = findCinema.findCinemaMovieTypeByMovie(findMovie);
         ShowTime findShowTime = ShowTime.findShowTimeById(showTimeId);
@@ -45,7 +43,7 @@ public class SeatsService {
                 .getSelectedMenu());
         SeatsForm seatsForm = QueryContainer.getSeatsQuery();
 
-        Movie findMovie = movieRepository.findMovieById(movieId);
+        Movie findMovie = Movies.findMovieById(movieId);
         Cinemas findCinema = Cinemas.findCinemaById(cinemaId);
         CinemaMovie findCinemaMovie = findCinema.findCinemaMovieTypeByMovie(findMovie);
         ShowTime findShowTime = ShowTime.findShowTimeById(showTimeId);

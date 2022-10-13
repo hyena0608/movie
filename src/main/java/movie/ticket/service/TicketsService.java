@@ -4,14 +4,13 @@ import movie.ticket.QueryContainer;
 import movie.ticket.domain.cinema.CinemaMovie;
 import movie.ticket.domain.cinema.Cinemas;
 import movie.ticket.domain.customer.Customer;
-import movie.ticket.domain.discount.CustomerDiscount;
 import movie.ticket.domain.discount.factory.DiscountFactory;
 import movie.ticket.domain.discount.factory.Discount;
 import movie.ticket.domain.movie.Movie;
+import movie.ticket.domain.movie.Movies;
 import movie.ticket.domain.screen.Screen;
 import movie.ticket.domain.seat.Seat;
 import movie.ticket.domain.showtime.ShowTime;
-import movie.ticket.repository.MovieRepository;
 import movie.ticket.ticket.Ticket;
 
 import java.util.List;
@@ -20,8 +19,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TicketsService {
-
-    private final MovieRepository movieRepository = new MovieRepository();
 
     public List<Ticket> generateTickets() {
         Long movieId = Long.parseLong(QueryContainer
@@ -44,7 +41,7 @@ public class TicketsService {
         Map<Customer, Integer> queriedCustomers = QueryContainer.getCustomerQuery()
                 .loadCustomerForms();
 
-        Movie findMovie = movieRepository.findMovieById(movieId);
+        Movie findMovie = Movies.findMovieById(movieId);
         Cinemas findCinema = Cinemas.findCinemaById(cinemaId);
         Screen findScreen = Screen.findScreenById(screenId);
         CinemaMovie findCinemaMovie = findCinema.findCinemaMovieTypeByMovie(findMovie);
